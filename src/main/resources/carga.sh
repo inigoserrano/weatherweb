@@ -1,0 +1,1 @@
+mongoimport --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PASSWORD -u $OPENSHIFT_MONGODB_DB_USERNAME -p $OPENSHIFT_MONGODB_DB_PASSWORD  -d weather -c weather --type csv  --headerline --file ./EasyWeather.txt

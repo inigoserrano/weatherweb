@@ -1,4 +1,4 @@
-No	Time	Interval(mi)	Indoor Humidity(%)	Indoor Temperature(°C)	Outdoor Humidity(%)	Outdoor Temperature(°C)	Absolute Pressure(Hpa)	Wind(km/h)	Gust(km/h)	Direction	Relative Pressure(Hpa)	Dewpoint(°C)	Windchill(°C)	Hour Rainfall(mm)	24 hour Rainfall(mm)	Week Rainfall(mm)	Month Rainfall(mm)	Total Rainfall(mm)	Wind Level(bft)	Gust Level(bft)
+No	Time	Interval	Indoor Humidity	Indoor Temperature	Outdoor Humidity	Outdoor Temperature	Absolute Pressure	Wind	Gust	Direction	Relative Pressure	Dewpoint	Windchill	Hour Rainfall	24 hour Rainfall	Week Rainfall	Month Rainfall	Total Rainfall	Wind Level	Gust Level
 1	24-01-2014 22:09	30	59	7.1	99	9.8	---	0.0	0.0	N	---	9.7	9.8	0.0	0.0	0.0	0.0	0.0	0	0
 2	24-01-2014 22:14	5	0	0.0	0	0.0	---	0.0	0.0	N	---	-1.0	0.0	0.0	0.0	0.0	0.0	0.0	0	0
 3	24-01-2014 22:44	30	60	7.2	99	9.9	952.0	1.1	6.1	NW	1033.7	9.8	9.9	33.0	33.0	33.0	33.0	33.0	1	2
