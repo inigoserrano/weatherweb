@@ -1,3 +1,4 @@
+No	Time	Interval	Indoor_Humidity	Indoor_Temperature	Outdoor_Humidity	Outdoor_Temperature	Absolute_Pressure	Wind	Gust	Direction	Relative_Pressure	Dewpoint	Windchill	Hour_Rainfall	24_hour_Rainfall	Week_Rainfall	Month_Rainfall	Total_Rainfall	Wind_Level	Gust_Level
 1	19-07-2013 15:11	30	55	7.3	83	10.7	935.4	18.4	30.6	S	1017.1	7.9	4.9	0.0	0.0	0.0	5.1	166.5	3	5
 2	19-07-2013 15:41	30	55	7.3	82	11.2	934.9	11.2	20.9	SE	1016.6	8.3	8.1	0.0	0.0	0.0	5.1	166.5	2	4
 3	19-07-2013 16:11	30	55	7.4	80	11.7	934.0	8.6	24.5	SE	1015.7	8.4	9.8	0.0	0.0	0.0	5.1	166.5	2	4
