@@ -6,19 +6,17 @@ import java.util.Map;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.ExpressionNode;
-import org.apache.camel.model.ProcessorDefinition;
-import org.apache.camel.model.RouteDefinition;
+import org.apache.camel.model.dataformat.BindyType;
 import org.apache.camel.model.dataformat.JsonLibrary;
 
 public class CargaDatosRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		RouteDefinition cargado = from("file:///Users/inigo/workspace/pruebaFuse/datos/entrada?noop=true");
-		ExpressionNode dividido = cargado.split(body(String.class).tokenize("\n")).parallelProcessing().process(new ParseoCSV());
-		ProcessorDefinition<ExpressionNode> json = dividido.marshal().json(JsonLibrary.Jackson);
-		json.to("file:///Users/inigo/workspace/pruebaFuse/datos/salida?fileExist=Append");
+		from("file:///Users/inigo/workspace/pruebaFuse/datos/entrada?noop=true").split(body(String.class).tokenize("\n")).parallelProcessing()
+				.filter().javaScript("request.body.match(/^[0-9]/) != null").unmarshal()
+				.bindy(BindyType.Csv, RegistroMeteorologico.class.getPackage().getName()).marshal().json(JsonLibrary.Jackson)
+		.to("file:///Users/inigo/workspace/pruebaFuse/datos/salida?fileExist=Append");
 
 	}
 
