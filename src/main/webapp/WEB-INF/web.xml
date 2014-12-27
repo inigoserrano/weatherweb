@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app metadata-complete="false" version="3.0"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<context-param>
-		<param-name>resteasy.servlet.mapping.prefix</param-name>
-		<param-value>/rest</param-value>
-	</context-param>
-	<servlet>
-		<servlet-name>resteasyservlet</servlet-name>
-		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-		<init-param>
-			<param-name>resteasy.scan</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<enabled>true</enabled>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>resteasyservlet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
+ xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ <context-param>
+  <param-name>resteasy.servlet.mapping.prefix</param-name>
+  <param-value>/rest</param-value>
+ </context-param>
+ <listener>
+  <description>Listener para inicializar el contexto de Camel</description>
+  <listener-class>com.inigoserrano.weatherweb.camel.CargaDatosListener</listener-class>
+ </listener>
+ <!-- RestEasy Servlet -->
+ <servlet>
+  <servlet-name>resteasyservlet</servlet-name>
+  <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+  <init-param>
+   <param-name>resteasy.scan</param-name>
+   <param-value>true</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+  <enabled>true</enabled>
+ </servlet>
+ <!-- Camel servlet -->
+ <servlet>
+  <servlet-name>CamelServlet</servlet-name>
+  <servlet-class>org.apache.camel.component.servlet.CamelHttpTransportServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <!-- Camel servlet mapping -->
+ <servlet-mapping>
+  <servlet-name>CamelServlet</servlet-name>
+  <url-pattern>/carga/*</url-pattern>
+ </servlet-mapping>
+ <!--  RestEasy Mapping -->
+ <servlet-mapping>
+  <servlet-name>resteasyservlet</servlet-name>
+  <url-pattern>/rest/*</url-pattern>
+ </servlet-mapping>
 </web-app>
