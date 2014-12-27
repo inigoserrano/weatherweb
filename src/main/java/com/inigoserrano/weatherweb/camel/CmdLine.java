@@ -3,21 +3,18 @@ package com.inigoserrano.weatherweb.camel;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
-public class Prueba {
+public class CmdLine {
 
 	public static void main(String[] args) {
 		try {
 			CamelContext context = new DefaultCamelContext();
 			context.addRoutes(new CargaDatosRoute());
 			context.start();
-			for (int i = 0; i < 1000; i++) {
-				Thread.sleep(100);
-				System.out.println(i);
-
+			for (int i = 60; i > 0; i--) {
+				Thread.sleep(1000);
+				System.out.println(i + " seg.");
 			}
-			// Thread.sleep(40000);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
