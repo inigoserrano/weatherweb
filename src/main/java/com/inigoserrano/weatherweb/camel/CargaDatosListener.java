@@ -5,13 +5,16 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.impl.SimpleRegistry;
 
 public class CargaDatosListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		CamelContext context = new DefaultCamelContext();
 		try {
+			SimpleRegistry registry = new SimpleRegistry();
+			registry.put("conexion", new WeatherWebClient());
+			CamelContext context = new DefaultCamelContext(registry);
 			context.addRoutes(new CargaDatosRoute());
 			context.addRoutes(new CargaDatosRoute("servlet:///tsv"));
 			context.start();

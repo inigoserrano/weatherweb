@@ -8,6 +8,27 @@ import org.apache.commons.csv.writer.CSVField;
 
 public class CargaDatosRoute extends RouteBuilder {
 
+	public static final String GUST_LEVEL = "Gust_Level";
+	public static final String WIND_LEVEL = "Wind_Level";
+	public static final String TOTAL_RAINFALL = "Total_Rainfall";
+	public static final String MONTH_RAINFALL = "Month_Rainfall";
+	public static final String WEEK_RAINFALL = "Week_Rainfall";
+	public static final String DAY_HOUR_RAINFALL = "Day_hour_Rainfall";
+	public static final String HOUR_RAINFALL = "Hour_Rainfall";
+	public static final String WINDCHILL = "Windchill";
+	public static final String DEWPOINT = "Dewpoint";
+	public static final String RELATIVE_PRESSURE = "Relative_Pressure";
+	public static final String DIRECTION = "Direction";
+	public static final String GUST = "Gust";
+	public static final String WIND = "Wind";
+	public static final String ABSOLUTE_PRESSURE = "Absolute_Pressure";
+	public static final String OUTDOOR_TEMPERATURE = "Outdoor_Temperature";
+	public static final String OUTDOOR_HUMIDITY = "Outdoor_Humidity";
+	public static final String INDOOR_TEMPERATURE = "Indoor_Temperature";
+	public static final String INDOOR_HUMIDITY = "Indoor_Humidity";
+	public static final String INTERVAL = "Interval";
+	public static final String TIME = "Time";
+	public static final String NO = "No";
 	private final String uriFrom;
 	private final String uriTo;
 
@@ -30,7 +51,9 @@ public class CargaDatosRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(uriFrom).unmarshal(config()).split().body().parallelProcessing().marshal().json(JsonLibrary.Jackson).to(uriTo);
+		String uriMongo = "mongodb:conexion?database=weatherweb&collection=weatherweb&operation=insert";
+		from(uriFrom).unmarshal(config()).split().body().parallelProcessing().bean(AjusteFormato.class)
+				.to(uriMongo).marshal().json(JsonLibrary.Jackson).to(uriTo);
 
 	}
 
@@ -38,27 +61,27 @@ public class CargaDatosRoute extends RouteBuilder {
 
 		CSVConfig config = new CSVConfig();
 		config.setDelimiter('\t');
-		config.addField(new CSVField("No"));
-		config.addField(new CSVField("Time"));
-		config.addField(new CSVField("Interval"));
-		config.addField(new CSVField("Indoor_Humidity"));
-		config.addField(new CSVField("Indoor_Temperature"));
-		config.addField(new CSVField("Outdoor_Humidity"));
-		config.addField(new CSVField("Outdoor_Temperature"));
-		config.addField(new CSVField("Absolute_Pressure"));
-		config.addField(new CSVField("Wind"));
-		config.addField(new CSVField("Gust"));
-		config.addField(new CSVField("Direction"));
-		config.addField(new CSVField("Relative_Pressure"));
-		config.addField(new CSVField("Dewpoint"));
-		config.addField(new CSVField("Windchill"));
-		config.addField(new CSVField("Hour_Rainfall"));
-		config.addField(new CSVField("Day_hour_Rainfall"));
-		config.addField(new CSVField("Week_Rainfall"));
-		config.addField(new CSVField("Month_Rainfall"));
-		config.addField(new CSVField("Total_Rainfall"));
-		config.addField(new CSVField("Wind_Level"));
-		config.addField(new CSVField("Gust_Level"));
+		config.addField(new CSVField(NO));
+		config.addField(new CSVField(TIME));
+		config.addField(new CSVField(INTERVAL));
+		config.addField(new CSVField(INDOOR_HUMIDITY));
+		config.addField(new CSVField(INDOOR_TEMPERATURE));
+		config.addField(new CSVField(OUTDOOR_HUMIDITY));
+		config.addField(new CSVField(OUTDOOR_TEMPERATURE));
+		config.addField(new CSVField(ABSOLUTE_PRESSURE));
+		config.addField(new CSVField(WIND));
+		config.addField(new CSVField(GUST));
+		config.addField(new CSVField(DIRECTION));
+		config.addField(new CSVField(RELATIVE_PRESSURE));
+		config.addField(new CSVField(DEWPOINT));
+		config.addField(new CSVField(WINDCHILL));
+		config.addField(new CSVField(HOUR_RAINFALL));
+		config.addField(new CSVField(DAY_HOUR_RAINFALL));
+		config.addField(new CSVField(WEEK_RAINFALL));
+		config.addField(new CSVField(MONTH_RAINFALL));
+		config.addField(new CSVField(TOTAL_RAINFALL));
+		config.addField(new CSVField(WIND_LEVEL));
+		config.addField(new CSVField(GUST_LEVEL));
 
 		CsvDataFormat formato = new CsvDataFormat();
 		formato.setConfig(config);
